@@ -20,28 +20,21 @@ window.addEventListener('click', function() {
 let stop = false;
 
 function loop() {
+  // stop = Collider.collision(flappyBird, ground, 'bottom', flappyBird.fallSpeed);
+  stop = flappyBird.collidesWithGround(ground, flappyBird.fallSpeed) || flappyBird.collidesWithTunnels(tunnels, flappyBird.fallSpeed); 
+  // stop = flappyBird.collidesWithGround(ground, flappyBird.fallSpeed) || Collider.collision(flappyBird, tunnels.Bottom, 'bottom', flappyBird.fallSpeed);
 
-  stop = Collider.collision(flappyBird, ground, 'bottom', flappyBird.fallSpeed);
- 
   Environment.fillBackground();
   scenario.draw();
 
+  tunnels.draw();
+  ground.draw();
+  flappyBird.draw();
+  
   if (!stop) {
     tunnels.runScript();
-  }
-  tunnels.draw();
-
-  if (!stop) {
     ground.runScript();
-  }
-  ground.draw();
-
-  if (!stop) {
     flappyBird.runScript();
-  }
-  flappyBird.draw();
-
-  if (!stop) {
     requestAnimationFrame(loop);
   }
 }

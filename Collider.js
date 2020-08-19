@@ -22,4 +22,4 @@ const Collider = {
   }
 }
 
-export default Collider;  
+export default Collider;

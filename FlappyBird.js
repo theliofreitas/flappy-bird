@@ -17,6 +17,7 @@ export default class FlappyBird {
   }
 
   jump() {
+    // Remover console.log
     console.log('------------JUMP------------')
     this.fallSpeed = 0;
     this.fallSpeed = - this.jumpForce;
@@ -27,8 +28,8 @@ export default class FlappyBird {
     this.positionAxisY += this.fallSpeed;
 
     this.foot = (this.positionAxisY + this.height);
-    console.log('Fallspeed: ' + this.fallSpeed)
-    console.log('Foot: ' + this.foot);
+    // console.log('Fallspeed: ' + this.fallSpeed)
+    // console.log('Foot: ' + this.foot);
   }
 
   draw() {
@@ -40,4 +41,53 @@ export default class FlappyBird {
       this.width, this.height,
     );
   }
+
+  collidesWithGround(ground, nextFrame) {
+    const playerColliderPoint = this.positionAxisY + this.height;
+    const groundColliderPoint = ground.positionAxisY;
+    const nextFrameColliderPoint = playerColliderPoint + nextFrame;
+
+    if (playerColliderPoint >= groundColliderPoint) {
+      // Houve colisão
+      return true;
+    }
+    else if (nextFrameColliderPoint > ground.positionAxisY) {
+      // Haverá colisão no próximo frame
+      this.positionAxisY = (ground.positionAxisY - this.height);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  // Refatorar 👇
+  collidesWithTunnels(tunnels) {
+    const playerXColliderPoint = this.positionAxisX + this.width;
+    const playerBottomYColliderPoint = this.positionAxisY + this.height;
+    const playerTopYColliderPoint = this.positionAxisY;
+
+    const tunnelsXColliderPoint = tunnels.Bottom.positionAxisX;
+    const tunnelsBottomYColliderPoint = tunnels.Bottom.positionAxisY;
+    const tunnelsTopYColliderPoint = tunnels.Top.positionAxisY + tunnels.height;
+
+    const collisionRange = tunnels.Bottom.positionAxisX + tunnels.width;
+
+    if (playerXColliderPoint >= tunnelsXColliderPoint) { 
+      if (this.positionAxisX < collisionRange){
+        // Bottom Collision
+        if (playerBottomYColliderPoint >= tunnelsBottomYColliderPoint) {
+          return true;
+        }
+        // Top Collision
+        else if (playerTopYColliderPoint <= tunnelsTopYColliderPoint) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+    }
+  }
+  // Refatorar 👆
 }

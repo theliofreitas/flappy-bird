@@ -10,13 +10,13 @@ export default class Tunnels {
       spriteX: 0,
       spriteY: 169,
       positionAxisX: Environment.canvas.width,
-      positionAxisY: 238 + this.randomY,
+      positionAxisY: 248 + this.randomY,
     }
     this.Top = {
       spriteX: 52,
       spriteY: 169,
       positionAxisX: Environment.canvas.width,
-      positionAxisY: -238 + this.randomY,
+      positionAxisY: -248 + this.randomY,
     }
     this.width = 52;
     this.height = 400;
