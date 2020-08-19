@@ -25,19 +25,23 @@ function loop() {
  
   Environment.fillBackground();
   scenario.draw();
+
+  if (!stop) {
+    tunnels.runScript();
+  }
   tunnels.draw();
 
-  if(!stop){
+  if (!stop) {
     ground.runScript();
   }
   ground.draw();
 
-  if(!stop){
+  if (!stop) {
     flappyBird.runScript();
   }
   flappyBird.draw();
 
-  if(!stop){
+  if (!stop) {
     requestAnimationFrame(loop);
   }
 }

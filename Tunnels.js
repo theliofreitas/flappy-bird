@@ -9,17 +9,22 @@ export default class Tunnels {
     this.Bottom = {
       spriteX: 0,
       spriteY: 169,
-      positionAxisX: 150,  //canvas.width  <-----|__|
+      positionAxisX: Environment.canvas.width,
       positionAxisY: 238 + this.randomY,
     }
     this.Top = {
       spriteX: 52,
       spriteY: 169,
-      positionAxisX: 150,  //canvas.width  <-----|__|
+      positionAxisX: Environment.canvas.width,
       positionAxisY: -238 + this.randomY,
     }
     this.width = 52;
     this.height = 400;
+  }
+
+  runScript() {
+    this.Bottom.positionAxisX -= 2;
+    this.Top.positionAxisX -= 2;
   }
 
   draw() {
